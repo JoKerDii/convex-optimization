@@ -11,13 +11,13 @@ Content:
 
 ## Affine Set and Convex Set
 
-**Affine set**: A line through points $x_1, x_2$ is all points that $x=\theta x_1 + (1-\theta) x_2, (\theta \in \text{R})$. An affine set is a set where if you have two distinct points in the set then the line that passes through it is contained entirely in the set.
+**Affine set**: A line through points $x_1, x_2$ is all points that $x=\theta x_1 + (1-\theta) x_2, (\theta \in \mathbf{R})$. An affine set is a set where if you have two distinct points in the set then the line that passes through it is contained entirely in the set.
 
 Example: solution set of linear equations $\{x| Ax=b\}$ is an affine set. Conversely, every affine set can be expressed as solution set of system of linear equations.
 
 Verification of "affine set is a solution set of system of linear equations": 
 
-Let's define a line as $x = \theta x_1+ (1-\theta) x_2, \space (\theta \in \bold{R})$, and a linear equation as $Ax=b$, then
+Let's define a line as $x = \theta x_1+ (1-\theta) x_2, \space (\theta \in \mathbf{R})$, and a linear equation as $Ax=b$, then
 $$
 \begin{aligned}
 Ax_1 &= b, \space Ax_2 = b\\
@@ -35,7 +35,7 @@ $$
 
 **Hyperplane**: A hyperplane is a solution set of a single linear equation. A set of form $\{x|a^T x = b\} \space (a\neq 0)$. 
 
-* In $\text{R}^2$ it's a line. In $\text{R}^3$, it's a plane. In higher dimensions, it's a hyperplane.
+* In $\mathbf{R}^2$ it's a line. In $\mathbf{R}^3$, it's a plane. In higher dimensions, it's a hyperplane.
 * $a$ is a normal vector to that hyperplane.
 * Hyperplanes are affine and convex
 
@@ -61,7 +61,7 @@ $$
 **Norm**: is a function $\| · \|$ that satisfiies
 
 * Positive definiteness: $\|x \| \geq 0; \|x\|=0$ if and only if $x=0$
-* Homogeneous of degree 1: $\|tx\|= |t| \|x \|$ for $t \in \text{R}$
+* Homogeneous of degree 1: $\|tx\|= |t| \|x \|$ for $t \in \mathbf{R}$
 * Triangle inequality: $\|x+y\| \leq \|x\| + \|y\|$
 
 The notation $\|·\|$ is general (unspecified) norm; $\|·\|$ is particular norm. e.g. $\|x\|_2 = \sqrt{x_1^2 + .. x_n^2}$
@@ -73,7 +73,7 @@ The notation $\|·\|$ is general (unspecified) norm; $\|·\|$ is particular norm
 * Euclidean norm cone is called second-order cone.
 * Norm balls and cones are convex.
 
-**Polyhedron** is a solution set of finitely many linear inequalities and equalities: $Ax \preccurlyeq b, \space Cx = d$. ($A \in \text{R}^{m\times n}, C \in \text{R}^{p \times n}, \preccurlyeq$ is componentwise inequality). Polyhedron is intersection of finite number of halfspaces and hyperplanes.
+**Polyhedron** is a solution set of finitely many linear inequalities and equalities: $Ax \preccurlyeq b, \space Cx = d$. ($A \in \mathbf{R}^{m\times n}, C \in \mathbf{R}^{p \times n}, \preccurlyeq$ is componentwise inequality). Polyhedron is intersection of finite number of halfspaces and hyperplanes.
 
 **Positive semidefinite cone**: 
 
@@ -111,21 +111,21 @@ Practical methods for establishing convexity of a set $C$:
 
 The intersection of (any number of) convex sets is convex.
 
-Example: $S = \{x \in \text{R}^m \space | \space |p(t)| \leq 1 \text{ for } |t| \leq \pi/3\}$, where $p(t) = x_1 \cos t+x_2 \cos 2t + ... + x_m \cos mt$. In other words, if $S_t = \{x \in \text{R}^m \space | \space |p(t)| \leq 1\}$, then $S = \cap_{0 \leq t\leq \pi/3} S_t$.
+Example: $S = \{x \in \mathbf{R}^m \space | \space |p(t)| \leq 1 \text{ for } |t| \leq \pi/3\}$, where $p(t) = x_1 \cos t+x_2 \cos 2t + ... + x_m \cos mt$. In other words, if $S_t = \{x \in \mathbf{R}^m \space | \space |p(t)| \leq 1\}$, then $S = \cap_{0 \leq t\leq \pi/3} S_t$.
 
 ### Affine Functions
 
 Affine functions preserve convexity in both directions, both forward and reverse.
 
-Suppose $f : \text{R}^n \rightarrow \text{R}^m$ is affine ($f(x) = Ax+b$ with $A\in \text{R}^{m\times n}, b\in \text{R}^m$)
+Suppose $f : \mathbf{R}^n \rightarrow \mathbf{R}^m$ is affine ($f(x) = Ax+b$ with $A\in \text{R}^{m\times n}, b\in \mathbf{R}^m$)
 
 * The image of a convex set under $f$ is convex
 
-  $S \subseteq\text{R}^n$ convex $\implies$ $f(S) = \{f(x) \space | \space x \in S\}$ convex
+  $S \subseteq\mathbf{R}^n$ convex $\implies$ $f(S) = \{f(x) \space | \space x \in S\}$ convex
 
 * The inverse image $f^{-1}(C)$ of a convex set under $f$ is convex
 
-  $C\subseteq \text{R}^m$ convex $\implies$ $f^{-1}(C) = \{x \in \text{R}^n \space | \space f(x) \in C\}$ convex
+  $C\subseteq \mathbf{R}^m$ convex $\implies$ $f^{-1}(C) = \{x \in \mathbf{R}^n \space | \space f(x) \in C\}$ convex
 
   $f^{-1}(C)$ is defined for a set, even in cases when $f$ is not invertible and $f^{-1}(·)$ does not exist, $f$ inverse the relation does.
 
@@ -141,19 +141,19 @@ Examples:
 
 ### Perspective Function
 
-$P: \text{R}^{n+1} \rightarrow \text{R}^n$: $P(x,t) = x/t, \space \text{dom} P = \{(x,t) \space | \space t > 0\}$.
+$P: \mathbf{R}^{n+1} \rightarrow \mathbf{R}^n$: $P(x,t) = x/t, \space \text{dom} P = \{(x,t) \space | \space t > 0\}$.
 
 Images and inverse images of convex sets under perspective are convex.
 
 ### Linear-Fractional Functions
 
-$f : \text{R}^n \rightarrow \text{R}^m, f(x) = {Ax+b \over c^x + d}, \space \text{dom} f = \{x \space | \space c^T x + d = 0 \}$:
+$f : \mathbf{R}^n \rightarrow \mathbf{R}^m, f(x) = {Ax+b \over c^x + d}, \space \text{dom} f = \{x \space | \space c^T x + d = 0 \}$:
 
 Image and inverse images of convex sets under linear-fractional functions are convex.
 
 ## Generalized inequalities
 
-A convex cone $K \subseteq \text{R}^n$ is a **proper cone** if 
+A convex cone $K \subseteq \mathbf{R}^n$ is a **proper cone** if 
 
 * $K$ is closed (contains it boundary)
 * $K$ is solid (has nonempty interior)
@@ -161,15 +161,15 @@ A convex cone $K \subseteq \text{R}^n$ is a **proper cone** if
 
 Examples: 
 
-* Nonnegative orthant $K = \text{R}_+^n= \{ x \in \text{R}^n \space | \space x_i \geq 0, i=1,...,n\}$ 
+* Nonnegative orthant $K = \mathbf{R}_+^n= \{ x \in \mathbf{R}^n \space | \space x_i \geq 0, i=1,...,n\}$ 
 * Poistive semidefinite cone $K = S_+^n$
-* Nonnegative polynomials on $[0,1]$: $K = \{x \in \text{R}^n \space | \space x_1 + x_2 t+ x_3 t^2 + ... + x_n t^{n-1} \geq 0 \text{ for } t \in [0,1]\}$
+* Nonnegative polynomials on $[0,1]$: $K = \{x \in \mathbf{R}^n \space | \space x_1 + x_2 t+ x_3 t^2 + ... + x_n t^{n-1} \geq 0 \text{ for } t \in [0,1]\}$
 
 **Generalized inequality** defined by a proper cone $K$: $x \preccurlyeq_K y \longleftrightarrow y-x \in K$, $x \prec_k y \longleftrightarrow y-x \in \text{int} K $
 
 Examples:
 
-* Componentwise inequality ($K = \text{R}_+^n$)
+* Componentwise inequality ($K = \mathbf{R}_+^n$)
 
   $x \preccurlyeq_{\text{R}_+^n} y \longleftrightarrow x_i \leq y_i, i=1,...,n$
 
@@ -199,7 +199,7 @@ There is a hyperplane $\{x | a^Tx = b\}$ separates the set $C$ and set $D$, or t
 >
 > Answer: False
 >
-> Explanation: If $x_0$ is, for example, the corner of a square in $\text{R}^2$, then there are infinitely many supporting hyperplanes at that point.
+> Explanation: If $x_0$ is, for example, the corner of a square in $\mathbf{R}^2$, then there are infinitely many supporting hyperplanes at that point.
 
 ## Dual cones and generalized inequalities
 
@@ -213,7 +213,7 @@ If $K$ is thin and sharp, then $K^*$ is thick and blunt. 90 degree $K$ is self d
 
 Example: 
 
-* $K=\text{R}^n_+: K^*=\text{R}^n_+$: a vector is non negative, if and only if, it makes a non negative inner product with all non negative vectors.
+* $K=\mathbf{R}^n_+: K^*=\mathbf{R}^n_+$: a vector is non negative, if and only if, it makes a non negative inner product with all non negative vectors.
 * $K=\text{S}^n_+:K^*=\text{S}^n_+$: a matrix is positive semi definite if and only if its trace against all positive semi definite matrices is non negative.
 * $K = \{(x,t) \space | \space \|x\|_2 \leq t\} : K* = \{(x,t) \space | \space \|x\|_2 \leq t\}$
 * $K = \{(x,t) \space | \space \|x\|_1 \leq t\} : K* = \{(x,t) \space | \space \|x\|_{\infin} \leq t\}$
@@ -239,7 +239,7 @@ $x$ is minimum element of $S$ iff for all $\lambda \succ_{K^*}0$, $x$ is the uni
 
 **Optimal production frontier**
 
-* Different production methods use different amounts of resources $x \in \text{R}^n$.
+* Different production methods use different amounts of resources $x \in \mathbf{R}^n$.
 * Production set $P$: resource vectors $x$ for all possible production methods.
-* Efficient (Pareto optimal) methods correspond to resource vectors $x$ that are minimal w.r.t. $\text{R}_+^n$.
+* Efficient (Pareto optimal) methods correspond to resource vectors $x$ that are minimal w.r.t. $\mathbf{R}_+^n$.
 

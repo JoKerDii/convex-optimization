@@ -1,1 +1,1 @@
-# convex-optimization
+# Convex Optimization Notebook

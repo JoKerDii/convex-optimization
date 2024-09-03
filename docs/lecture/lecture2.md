@@ -162,7 +162,168 @@ Basic inequality is a special case with discrete distribution $P(z=x)=\theta, P(
 
 Practical methods for establishing convexity of a function
 
+1. Verify definition (often simplified by restricting to a line)
+2. For twice differentiable functions, show $\nabla^2 f(x) \succeq 0$
+3. Show that $f$ is obtained from simple convex functions by operations that preserve convexity
+   * Nonnegative weighted sum
+   * Composition with affine function
+   * Pointwise maximum and supremum
+   * Composition 
+   * Minimization 
+   * Perspective
+
+### Positive Weighted Sum & Composition with Affine Function
+
+**Nonnegative multiple**: $\alpha f$ is convex if $f$ is convex, $\alpha \geq 0$.
+
+**Sum**: $f_1 + f_2$ convex if $f_1, f_2$ convex (extends to infinite sums, integrals)
+
+**Composition with affine function**: $f(Ax+b)$ is convex if $f$ is convex.
+
+**Example:** 
+
+* Log barrier for linear inequalities
+
+  $f(x) = -\sum^m_{i=1}\log(b_i-a_i^Tx),  \space \text{dom} f = \{x | a_i^Tx < b_i, i = 1, ..., m\}$
+
+  This is a convex function called 'logarithmic barrier function' for the domain which is an open polyheron.
+
+  It's called logarithmic barrier function because when it goes closer to the boundary, $b_i-a_i^Tx$ will be very small and the $f(x)$ will go infinitely positive large.
+
+* (any) norm of affine function: $f(x) = \|Ax+b\|$
+
+### Pointwise Maximum
+
+If $f_1, ..., f_m$ are convex, then $f(x)=\max\{f_1(x), ...., f_m(x)\}$ is convex. 
+
+(Note that this does not guarantee differentiability. Actually, differentiability does not play a critical role in convexity. This is a first hint that convex optimization does not require much calculus.)
+
+Example:
+
+* Piecewise-linear function: $f(x)=\max_{i=1,...,m}(a_i^Tx+b_i)$ is convex
+
+* Sum of $r$ largest components of $x \in \mathbf{R}^n$:
+
+  $f(x)=x_{[1]}+x_{[2]}+...+x_{[r]}$ is convex ($x_{[i]}$ is $i$th largest component of $x$)
+
+  Proof: $f(x) = \max \{x_{i_1} + x_{i_2} + ... + x_{i_r}| 1 \leq i_i < i_2 < ... < i_r \leq n\}$
+
+### Pointwise Supremum
+
+If $f(x,y)$ is convex in $x$ for each $y\in A$, then $g(x) = \sup_{y\in A} f(x,y)$ is convex.
+
+Example: 
+
+* Support function of a set $C$: $S_C(x) = \sup_{y\in C} y^Tx$ is convex
+
+* Distance to farthest point ini a set $C$:
+
+  $f(x)=\sup_{y\in C} \|x-y\|$
+
+* Maximum eigenvalue of symmetric matrix: for $X\ in S^n$:
+
+  $\lambda_{max}(X) = \sup_{\|y\|_2=1} y^TX y $ 
+
+### Composition with Scalar functions
+
+Composition of $g$: $\mathbf{R}^n \rightarrow \mathbf{R}$ and $h: \mathbf{R} \rightarrow \mathbf{R}:$ $f(x) = h(g(x))$
+
+$f$ is convex if
+
+1. $g$ convex, $h$ convex, $\tilde{h}$ non decreasing. ($\tilde{h}$ is extended-value extension of $h$)
+2. $g$ concave, $h$ convex, $\tilde{h}$ non increasing. ($\tilde{h}$ is extended-value extension of $h$)
+
+* Proof (for $n=1$, differentiable $g,h$)
+
+  $f''(x) = h''(g(x))g'(x)^2 + h'(g(x))g''(x)$
+
+* Note: monotonicity must hold for extended-value extension $\tilde{h}$, because of $h'(g(x))$ part in the second derivative function.
+
+Examples:
+
+* $\exp g(x)$ is convex if $g$ if convex
+* $1/g(x)$ is convex if $g$ is concave and positive
+
+### Vector Composition
+
+Composition of $g:\mathbf{R}^n \rightarrow \mathbf{R}^k$ and $h: \mathbf{R}^k \rightarrow \mathbf{R}$:
+
+$f(x)=h(g(x)) = h(g_1(x),g_2(x), ..., g_k(x))$
+
+$f$ is convex if 
+
+1. $g_i$ convex, $h$ convex,  $\tilde{h}$ is non decreasing in each argument
+2. $g_i$ concave, $h$ convex,  $\tilde{h}$ is non increasing in each argument
+
+Proof (for $n=1$, differentiable $g,h$)
+
+$f''(x)= g'(x)^T\nabla^2h(g(x))g'(x) + \nabla h(g(x))^Tg''(x)$
+
+Defined in another way: $f$ is convex if for each $i$,
+
+1. $g_i$ is affine
+2. $g_i$ is convex and $h$ is increasing in each argument $i$
+3. $g_i$ is concave and $h$ is decreasing in each argument $i$
+
+Examples:
+
+* $\sum_{i=1}^m \log g_i(x)$ is concave if $g_i$ are concave and positive
+
+* $\log \sum_{i=1}^m \exp g_i(x)$ is convex if $g_i$ are convex.
+
+  Log sum $x$ function is convex. it's increasing in each argument.
+
+### Minimization
+
+If $f(x,y)$ is convex in $(x,y)$ and $C$ is a convex set, then $g(x)=\inf_{y\in C} f(x,y)$ is convex. (Partial minimization of $f$ preserves convexity).
+
+Examples:
+
+* $f(x,y) = x^TAx + 2x^TBy + y^TCy$ with $\begin{bmatrix} A & B \\ B^T & C \end{bmatrix} \succeq 0, C \succ0$, 
+
+  minimizing over $y$ gives $g(x) = \inf_y f(x,y)= x^T(A-BC^{-1}B^T)x$
+
+  $g$ is convex, hence **Schur complement** $A-BC^{-1}B^T \succeq0$
+
+  Note that quadratic functions actually are preserved under partial minimization.
+
+* Distance to a set: $\text{dist}(x,S) = \inf_{y\in S} \|x-y\|$ is convex if $S$ is convex.
+
+### Perspective
+
+The **perspective** of a function $f:\mathbf{R}^n \rightarrow \mathbf{R}$ is the function $g: \mathbf{R}^n \times \mathbf{R} \rightarrow \mathbf{R}$, 
+
+(perspective is a function on the graph space, it takes two arguments $x, t$)
+
+$g(x,t)=tf(x/t), \space \text{dom} g = \{(x,t)| x/t \in \text{dom} f,t > 0\}$
+
+$g$ is convex if $f$ is convex.
+
+Example: 
+
+* $f(x) = x^Tx$ is convex; hence $g(x,t)=t(x/t)^T(x/t)=x^Tx / t$ is convex for $t>0$
+* Negative logarithm $f(x)=-\log x$ is convex; hence relative entropy $g(x,t)=t\log t - t\log x$ is convex on $\mathbf{R}_{++}^2$.
+* If $f$ is convex, then $g(x)=(c^Tx+d)f((Ax+b)/(c^Tx+d))$ is convex on $\{x | c^Tx +d > 0, (Ax+b)/(c^xx+d) \in \text{dom} f\}$
+
 ## The Conjugate Function
+
+The **conjugate** of a function $f$ is $f^*(x)=\sup_{x \in \text{dom}f} (y^Tx-f(x))$
+
+You have function $f(x)$ and linear function $y^T x$ or $xy$, you move $xy$ until it touches a point of $f(x)$ so that $y^T x - f(x)$ is minimized. The the height of $yx$ would be negative conjugate $f^*(x)$. If $y$ increases, conjugate goes up. (Thinking about changing from x to 2x). 
+
+* $f^*$ is convex (even if $f$ is not).
+
+Examples:
+
+* Negative logarithm $f(x)=-\log x$
+
+  $f^*(y) = \sup_{x>0} (xy+\log x) = \begin{cases}-1-\log(-y), & y< 0\\ \infin, & \text{otherwise} \end{cases}$
+
+* Strictly convex quadratic $f(x)=(1/2)x^TQx$ with $Q\in S_{++}^n$
+
+  $f^*(y) = \sup_x(y^x-(1/2)x^TQx) = 1/2 y^TQ^{-1}y$
+
+  The conjugate of a quadratic form is the quadratic form with the inverse matrix.
 
 ## Quasiconvex Functions
 
